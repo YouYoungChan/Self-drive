@@ -8,20 +8,20 @@ import numpy as np
 
 def avg_range(ranges):
     range_arr = np.array(ranges)
-    p_arr = range_arr[0:40]
-    m_arr = range_arr[-40: ]
+    p_40 = range_arr[0:40]
+    m_40 = range_arr[-40: ]
     p_80 = range_arr[40:80]
     m_80 = range_arr[-80:-40]
-    p_arr_real = p_arr[p_arr > 0]
-    m_arr_real = m_arr[m_arr > 0]
+    p_40_real = p_arr[p_arr > 0]
+    m_40_real = m_arr[m_arr > 0]
     p_80_real = p_80[p_80 > 0]
     m_80_real = m_80[m_80 > 0]
-    p_mean = np.mean(p_arr_real)
-    m_mean = np.mean(m_arr_real)
+    p_40_mean = np.mean(p_arr_real)
+    m_80_mean = np.mean(m_arr_real)
     p_80_mean = np.mean(p_80_real)
     m_80_mean = np.mean(m_80_real)
-    print("P : ", p_mean, "\n M : ", m_mean , "\n p80 : ", p_80_mean, "\n m80 : ", m_80_mean )
-    return p_mean,m_mean,p_80_mean,m_80_mean
+    print("p40 : ", p_40_mean, "\n M40 : ", m_40_mean , "\n p80 : ", p_80_mean, "\n M80 : ", m_80_mean )
+    return p_40_mean,m_40_mean,p_80_mean,m_80_mean
 
 class SelfDrive:
     def __init__(self, publisher):
