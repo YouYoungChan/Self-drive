@@ -58,6 +58,7 @@ class SelfDrive:
                 turtle_vel.angular.z = 2.0
             else:
                 turtle_vel.angular.z = -2.0
+
         else:
             turtle_vel.linear.x = 0.15
             turtle_vel.angular.z = 0.0
