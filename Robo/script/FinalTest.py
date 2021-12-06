@@ -10,12 +10,18 @@ def avg_range(ranges):
     range_arr = np.array(ranges)
     p_arr = range_arr[0:40]
     m_arr = range_arr[-40: ]
+    p_80 = range_arr[40:80]
+    m_80 = range_arr[-80:-40]
     p_arr_real = p_arr[p_arr > 0]
     m_arr_real = m_arr[m_arr > 0]
+    p_80_real = p_80[p_80 > 0]
+    m_80_real = m_80[m_80 > 0]
     p_mean = np.mean(p_arr_real)
     m_mean = np.mean(m_arr_real)
-    print("P : ", p_mean, "\n M : ", m_mean)
-    return p_mean,m_mean
+    p_80_mean = np.mean(p_80_real)
+    m_80_mean = np.mean(m_80_real)
+    print("P : ", p_mean, "\n M : ", m_mean , "\n p80 : ", p_80_mean, "\n m80 : ", m_80_mean )
+    return p_mean,m_mean,p_80_mean,m_80_mean
 
 class SelfDrive:
     def __init__(self, publisher):
@@ -28,7 +34,13 @@ class SelfDrive:
         print("scan[0]:", scan.ranges[0])
         turtle_vel = Twist()
          # 전진 속도 및 회전 속도 지정
-        plus_avg, minus_avg = avg_range(scan.ranges)
+        plus_avg, minus_avg, p_80, m_80 = avg_range(scan.ranges)
+
+        if p_80 < 0.30 or m_80 < 0.30:
+            if p_80 >= m_80:
+                turtle_vel.angular.z = 2.0
+            else:
+                turtle_vel.angular.z = -2.0
 
         if plus_avg < 0.30 or minus_avg < 0.30:
             turtle_vel.linear.x = 0
