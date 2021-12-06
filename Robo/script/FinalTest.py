@@ -21,7 +21,7 @@ class SelfDrive:
                 turtle_vel.linear.x = 0.01
                 turtle_vel.linear.z = 0.1
             else:
-                turtle_vel.linear.x = 0.1
+                turtle_vel.linear.x = 0.15
                 turtle_vel.linear.z = 0.0
 	
          # 속도 출력
